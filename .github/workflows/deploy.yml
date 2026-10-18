@@ -20,10 +20,10 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           mkdir _site && cat site.tar.part* | tar -xf - -C _site && touch _site/.nojekyll
-          if [ -f index.html ]; then cp index.html _site/index.html; fi
           if [ -f update.tar ]; then tar -xf update.tar -C _site; fi
           # V6 overlay: new page, cleaned paintings, teasers, CV, logos, protection tools
           if ls v6.tar.part* >/dev/null 2>&1; then cat v6.tar.part* | tar -xf - -C _site; fi
+          if [ -f index.html ]; then cp index.html _site/index.html; fi
           # V6 rights protection: bake the RN watermark into every work image/page and rebuild PDFs (CV excluded)
           pip install -q --break-system-packages pillow
           if [ -f _site/tools/protect.py ]; then python3 _site/tools/protect.py _site && rm -rf _site/tools; fi
