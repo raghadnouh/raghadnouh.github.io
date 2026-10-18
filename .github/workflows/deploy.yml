@@ -24,6 +24,7 @@ jobs:
           # V6 overlay: new page, cleaned paintings, teasers, CV, logos, protection tools
           if ls v6.tar.part* >/dev/null 2>&1; then cat v6.tar.part* | tar -xf - -C _site; fi
           if [ -f index.html ]; then cp index.html _site/index.html; fi
+          for f in Raghad-Nouh-CV-AR.pdf Raghad-Nouh-CV-EN.pdf Raghad-Nouh-Intro.pdf; do [ -f "$f" ] && mkdir -p _site/extras && cp "$f" "_site/extras/$f"; done
           # V6 rights protection: bake the RN watermark into every work image/page and rebuild PDFs (CV excluded)
           pip install -q --break-system-packages pillow
           if [ -f _site/tools/protect.py ]; then python3 _site/tools/protect.py _site && rm -rf _site/tools; fi
